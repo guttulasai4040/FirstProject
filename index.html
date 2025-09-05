@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Productivity Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <img src="assets/icon.svg" alt="Logo" class="logo"/>
+      <h1>Productivity Dashboard</h1>
+    </div>
+    <div class="actions">
+      <button id="themeToggle" class="btn" title="Toggle theme" aria-label="Toggle theme">🌓</button>
+      <button id="exportData" class="btn" title="Export data" aria-label="Export data">⬇️</button>
+      <label for="importFile" class="btn" title="Import data" aria-label="Import data">⬆️</label>
+      <input id="importFile" type="file" accept="application/json" hidden/>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="tabs" role="tablist">
+      <button role="tab" class="tab active" data-tab="todos" aria-selected="true">To‑Dos</button>
+      <button role="tab" class="tab" data-tab="notes" aria-selected="false">Notes</button>
+      <button role="tab" class="tab" data-tab="pomodoro" aria-selected="false">Pomodoro</button>
+      <button role="tab" class="tab" data-tab="about" aria-selected="false">About</button>
+    </nav>
+
+    <section id="tab-todos" class="panel active" role="tabpanel" aria-labelledby="todos">
+      <div class="card">
+        <h2>Add Task</h2>
+        <form id="todoForm" class="grid-form">
+          <input id="todoInput" type="text" placeholder="What needs to be done?" required/>
+          <select id="todoPriority">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+          <input id="todoDue" type="date"/>
+          <button class="btn primary" type="submit">Add</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <div class="list-header">
+          <h2>Tasks</h2>
+          <div class="filters">
+            <input id="searchTodos" type="search" placeholder="Search..."/>
+            <select id="filterStatus">
+              <option value="all" selected>All</option>
+              <option value="open">Open</option>
+              <option value="done">Done</option>
+            </select>
+            <select id="sortTodos">
+              <option value="created">Created</option>
+              <option value="due">Due date</option>
+              <option value="priority">Priority</option>
+            </select>
+          </div>
+        </div>
+        <ul id="todoList" class="todo-list" aria-live="polite"></ul>
+      </div>
+    </section>
+
+    <section id="tab-notes" class="panel" role="tabpanel" aria-labelledby="notes">
+      <div class="card">
+        <h2>Create Note</h2>
+        <form id="noteForm" class="grid-form">
+          <input id="noteTitle" type="text" placeholder="Title" required/>
+          <textarea id="noteBody" rows="5" placeholder="Write your note..." required></textarea>
+          <button class="btn primary" type="submit">Save</button>
+        </form>
+      </div>
+      <div class="card">
+        <div class="list-header">
+          <h2>Notes</h2>
+          <input id="searchNotes" type="search" placeholder="Search notes..."/>
+        </div>
+        <div id="notesGrid" class="notes-grid"></div>
+      </div>
+    </section>
+
+    <section id="tab-pomodoro" class="panel" role="tabpanel" aria-labelledby="pomodoro">
+      <div class="card pomodoro">
+        <h2>Pomodoro Timer</h2>
+        <div class="timer" id="timerDisplay" aria-live="polite">25:00</div>
+        <div class="controls">
+          <button id="startPomodoro" class="btn primary">Start</button>
+          <button id="pausePomodoro" class="btn">Pause</button>
+          <button id="resetPomodoro" class="btn">Reset</button>
+        </div>
+        <div class="settings">
+          <label>Focus (min) <input id="focusLen" type="number" min="1" max="90" value="25"/></label>
+          <label>Short Break (min) <input id="shortLen" type="number" min="1" max="30" value="5"/></label>
+          <label>Long Break (min) <input id="longLen" type="number" min="1" max="60" value="15"/></label>
+          <label>Intervals to Long Break <input id="intervals" type="number" min="1" max="12" value="4"/></label>
+        </div>
+        <div class="mode" id="pomoMode">Mode: Focus</div>
+      </div>
+    </section>
+
+    <section id="tab-about" class="panel" role="tabpanel" aria-labelledby="about">
+      <div class="card">
+        <h2>About this Project</h2>
+        <p>This is a pure HTML, CSS, and JavaScript project you can open directly in a browser or run via a simple static server. All data is stored locally in your browser (localStorage).</p>
+        <ul>
+          <li>To‑Dos: add, search, sort, and toggle completion.</li>
+          <li>Notes: create, search, and delete notes.</li>
+          <li>Pomodoro: configurable focus/break intervals.</li>
+          <li>Light/Dark theme toggle.</li>
+          <li>Export/Import your data as JSON (no server needed).</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <small>Built with ❤️ using vanilla web technologies.</small>
+  </footer>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>
